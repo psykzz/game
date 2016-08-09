@@ -19,6 +19,7 @@ class Component(object):
     def update(self, game):
         pass
 
+
 class Debug(Component):
     draw_position = True
     draw_speed = True
@@ -41,12 +42,8 @@ class Debug(Component):
         return output % tuple(args)
 
 
-class InterpolateMoveable(Component):
+class InterpolateMoveable(Moveable):
     interpolation = 0.65
-    move_speed = 5
-
-    def update(self, game):
-        self.process_movement(game)
 
     def process_movement(self, game):
         if self.entity.move_to:
@@ -56,6 +53,7 @@ class InterpolateMoveable(Component):
                 new_pos = current.interpolate(self.entity.move_to, self.interpolation * speed)
                 self.entity.pos.x = new_pos.x
                 self.entity.pos.y = new_pos.y 
+
 
 class Moveable(Component):
     move_speed = 5
